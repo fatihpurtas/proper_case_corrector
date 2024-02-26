@@ -4,7 +4,7 @@
     <h2>Usage</h2>
     <ol>
         <li>Clone the repository to your local machine:</li>
-        <code>git clone https://github.com/your-username/proper_case_corrector.git</code>
+        <code>git clone https://github.com/fatihpurtas/proper_case_corrector.git</code>
         <li>Navigate to the project directory:</li>
         <code>cd proper_case_corrector</code>
         <li>Run the Python script:</li>
