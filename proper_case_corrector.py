@@ -1,4 +1,6 @@
-import sys
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import messagebox
 
 def type_corrector(txt):
     txt = txt.lower()
@@ -10,27 +12,33 @@ def type_corrector(txt):
         lines[i] = ' '.join(words)
     return '\n'.join(lines)
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python file.py <file_name>")
+def process_file():
+    file_path = filedialog.askopenfilename()
+    if not file_path:
+        messagebox.showerror("Error", "No file selected.")
         return
-    file_name = sys.argv[1]
 
     try:
-        with open(file_name, "r", encoding="utf-8") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             txt = file.read()
     except FileNotFoundError:
-        print(f"{file_name} file not found..")
+        messagebox.showerror("Error", f"{file_path} file not found.")
         return
 
     output = type_corrector(txt)
 
-    new_file_name = "edited_" + file_name
-    with open(new_file_name, "w", encoding="utf-8") as file:
+    new_file_path = "edited_" + file_path
+    with open(new_file_path, "w", encoding="utf-8") as file:
         file.write(output)
 
-    print(f"New text file created: {new_file_name}")
+    messagebox.showinfo("Success", f"New text file created: {new_file_path}")
 
+# Create main window
+root = tk.Tk()
+root.title("Text Type Corrector")
 
-if __name__ == "__main__":
-    main()
+# Create a button for selecting file
+select_button = tk.Button(root, text="Select File", command=process_file)
+select_button.pack(pady=20)
+
+root.mainloop()
